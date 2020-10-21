@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Save Item Details</title>
+
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<!--  <script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+<link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+<link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>-->
+<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css} "/>
+<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.8.2/css/all.css} "/>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script>
+$('.inputgroup.date').datepicker({
+    autoclose: true,
+    todayHighlight: true
+});
+
+</script>
+
+
+</head>
+
+<body>
+	
+	<div class = "container">
+		<div id = "content">
+		<h3>Lost Item Directory</h3>
+		<hr>
+		
+		<p class = "h4 mb-4">Add Item</p>
+		
+		<form action="#" th:action="@{/save}" th:object="${LostThing}" method="post">
+			
+			
+			<input type = "hidden" th:field = *{id}/>
+			
+			<label for="name">Name :</label>
+   			<input type="text" id="name" name="lostItemName" th:field="*{name}" 
+								placeholder = "name" class = "form-control mb-4 col-4" />
+			
+			
+			
+			<label for="place">Address :</label>
+			<input type="text" id="place" name="lostItemaddress" th:field="*{place}" 
+								placeholder = "Address" class = "form-control mb-4 col-4" />
+			
+			
+			<label for="date">Date :</label>
+			<div class="input-group date mt-5 mb-4 col-4">				
+			<input type="text" id="date" name="lostItemDate" autocomplete="off" th:field="*{date}" 
+								placeholder = "dd/mm/yyyy" class = "form-control" />
+					<div class="input-group-append">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+			</div>
+			
+					
+			<label for="phoneNumber">Phone No :</label>		
+			<input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" 
+							placeholder = "Phone no." class = "form-control mb-4 col-4"/>
+				
+			<label for="lostOrFound">lostOrFound:</label>
+			<ul style="list-style-type: none;" >	
+			<li><input type="radio" id="lost" name="lostOrFound" th:field="*{lost_or_found}" th:value="Lost"
+							 class = "mb-2 col-2"/>Lost</li>
+			<li><input type="radio" id="found" name="lostOrFound" th:field="*{lost_or_found}" th:value="Found"
+							 class = "mb-2 col-2"/>Found</li>
+							 </ul>
+
+			<button type="submit" class="btn btn-info col-2">Save</button>				
+							
+		</form>
+		<hr>
+
+			<p>
+				<a th:href = "@{/list}" class= "btn btn-info col-2">Back to Items list</a>
+			</p>
+		
+		</div>
+		</div>
+		
+
+
+</body>
+</html>

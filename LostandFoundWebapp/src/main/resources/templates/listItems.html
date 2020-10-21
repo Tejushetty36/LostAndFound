@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta charset="ISO-8859-1">
+<title>List of Lost Items</title>
+
+<link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/sample.js}"></script>
+<link href="webjars/font-awesome/5.8.2/css/fontawesome.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<div class = "container">
+			<h3>Lost Item Directory</h3>
+		
+	<hr>
+			
+	<a th:href = "@{/showFormForAdd}" class= "btn btn-success col-2">Add Item</a>
+	
+	<form action="#" th:action="@{/search}" th:object="${ItemsList}" method="get">
+		<input type = "text" name = "theSearchName" placeholder = "search name">
+		<button type="submit" class="btn btn-info col-2">Search</button>
+	</form>
+	<hr>
+	
+		<div id = "content">
+	
+			<table border="1" class="table table-striped table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th>Name</th>
+					<th>Lost Place</th>
+					<th>Date</th>
+					<th>Phone Number</th>
+					<th>Status of Item</th>
+					<th>Action</th>
+				</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each = "tempThing : ${ItemsList}">
+						<td th:text = "${tempThing.name}"></td>
+						<td th:text = "${tempThing.place}"></td>
+						<td th:text = "${tempThing.date}"></td>
+						<td th:text = "${tempThing.phoneNumber}"></td>
+						<td th:text = "${tempThing.lost_or_found}"></td>
+						<td>
+							<a th:href ="@{/showFormForUpdate(ItemId=${tempThing.id})}" id = "updateLink"
+							class = "btn btn-primary btn-sm">Update</a>
+							|
+							<a th:href ="@{/deleteItem(ItemId=${tempThing.id})}"
+							onclick="if(!(confirm('Are you sure you want to delete the customer?'))) return false"
+							class = "btn btn-danger btn-sm">Delete</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
